@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Web Box - Pentest Selection | Advanced Security Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* 头部样式 - 与之前完全一致 */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 20px;
+            }
+            .nav-links a {
+                font-size: 12px;
+            }
+        }
+
+        /* Hero 区域 - 简化版 */
+        .hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            color: #fff;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .back-home {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: transparent;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .back-home:hover {
+            background-color: #ffffff;
+            color: #0a0a0a;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 2px;
+            position: relative;
+            color: #ffffff;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #ffffff;
+            margin: 20px auto 0;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #aaaaaa;
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        .pentest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .pentest-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #141414 100%);
+            padding: 35px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .pentest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.5s;
+        }
+
+        .pentest-card:hover::before {
+            left: 100%;
+        }
+
+        .pentest-card:hover {
+            border-color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+            transform: translateY(-8px);
+        }
+
+        /* 移除表情符号，改用纯CSS图形占位 */
+        .pentest-icon {
+            font-size: 0;
+            width: 48px;
+            height: 48px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-bottom: 20px;
+        }
+
+        /* 为每个套餐设置不同的白色SVG图标 */
+        .pentest-card:nth-child(1) .pentest-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E"); }
+        .pentest-card:nth-child(2) .pentest-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 24 24'%3E%3Cpath d='M20 8h-2.81c-.45-.8-1.07-1.5-1.82-2L15 4.56 17 2l6 6-2 2-1.41-1.41L20 8zm-10 0l-2-2-1.41 1.41L7.19 8H5l-2 2 6 6 2-2-1.41-1.41L10 10zm10 4l-2-2-1.41 1.41L16.81 14H14l-2 2 6 6 2-2-1.41-1.41L20 12z'/%3E%3C/svg%3E"); }
+        .pentest-card:nth-child(3) .pentest-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 24 24'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z'/%3E%3C/svg%3E"); }
+        .pentest-card:nth-child(4) .pentest-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 24 24'%3E%3Cpath d='M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z'/%3E%3C/svg%3E"); }
+
+        .pentest-card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        .pentest-card p {
+            color: #cccccc;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .select-pentest-btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: transparent;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 4px;
+        }
+
+        .select-pentest-btn:hover {
+            background-color: #ffffff;
+            color: #0a0a0a;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* 联系区域 - 与之前完全一致 */
+        #contact {
+            background-color: #0a0a0a;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 18px;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 2px solid #555;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s;
+            background-size: 24px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .contact-link.email-icon {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23e0e0e0' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E");
+        }
+        .contact-link.github-icon {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23e0e0e0' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.21.68-.48 0-.24-.01-.88-.01-1.72-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z'/%3E%3C/svg%3E");
+        }
+
+        .contact-link:hover {
+            border-color: #ffffff;
+            background-color: rgba(255,255,255,0.1);
+            transform: scale(1.05);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: transparent;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .cta-button:hover {
+            background-color: #ffffff;
+            color: #0a0a0a;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+            color: #888888;
+            font-size: 14px;
+        }
+
+        /* 移动端专用：滚动时隐藏header（仅移动端，当滚动到Basic Pentest区域上方时） */
+        @media (max-width: 768px) {
+            header.header-hidden {
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            }
+            header {
+                transition: transform 0.3s ease;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            .section-title {
+                font-size: 32px;
+            }
+            .pentest-card h3 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="mainHeader">
+        <nav>
+            <div class="logo">WEB BOX</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about-us">About us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Select Your Pentest Package</h1>
+            <p>Choose the right security assessment for your organization's needs</p>
+            <button class="back-home" id="backToHomeBtn">← Back to Home</button>
+        </div>
+    </section>
+
+    <section id="pentest-selection">
+        <h2 class="section-title">Pentesting Packages</h2>
+        <p class="section-subtitle">Comprehensive security testing tailored to your requirements</p>
+        <div class="pentest-grid">
+            <!-- Basic Pentest -->
+            <div class="pentest-card" data-test="Basic Pentest" id="basicCard">
+                <div class="pentest-icon"></div>
+                <h3>Basic Pentest</h3>
+                <p>Identifies basic vulnerabilities in networks, servers, and websites. Ideal for quick checks on new feature updates or basic websites.</p>
+                <button class="select-pentest-btn" data-package="basic">SELECT PACKAGE →</button>
+            </div>
+
+            <!-- Medium Pentest -->
+            <div class="pentest-card" data-test="Medium Pentest" id="mediumCard">
+                <div class="pentest-icon"></div>
+                <h3>Medium Pentest</h3>
+                <p>In-depth testing of networks and web applications. Suitable for small companies or independent ventures where realistic threat assessment is needed.</p>
+                <button class="select-pentest-btn" data-package="medium">SELECT PACKAGE →</button>
+            </div>
+
+            <!-- Advanced Pentest -->
+            <div class="pentest-card" data-test="Advanced Pentest" id="advancedCard">
+                <div class="pentest-icon"></div>
+                <h3>Advanced Pentest</h3>
+                <p>Includes everything from Medium Pentest, plus employee security testing, social engineering, phishing simulations, and insider threat analysis.</p>
+                <button class="select-pentest-btn" data-package="advanced">SELECT PACKAGE →</button>
+            </div>
+
+            <!-- Customized Pentest -->
+            <div class="pentest-card" data-test="Customized Pentest" id="customCard">
+                <div class="pentest-icon"></div>
+                <h3>Customized Pentest</h3>
+                <p>Tailored specifically to your organization's infrastructure, threat model, and compliance needs. Choose specific test types, scopes, and attack vectors.</p>
+                <button class="select-pentest-btn" data-package="custom">SELECT PACKAGE →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系区域 - 与之前完全一致 -->
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p>Ready to secure your infrastructure? Contact us for a consultation and let's discuss how we can help protect your organization.</p>
+            <div class="contact-links">
+                <a href="mailto:trenderwell@gmail.com" class="contact-link email-icon" title="Email"></a>
+                <a href="https://github.com/webboxpentester" class="contact-link github-icon" title="GitHub"></a>
+            </div>
+            <button class="cta-button" id="sendMessageBtn">Send Message</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Web Box Pentester. All rights reserved. | Security through transparency.</p>
+    </footer>
+
+    <script>
+        // ========== 所有新需求实现 ==========
+        // 1. 移除任何用户名询问和多余弹窗
+        // 2. 移除所有表情符号 (已通过CSS实现)
+        // 3. 四个按钮分别跳转到指定本地页面
+        // 4. 移动端滚动时：当Basic Pentest卡片进入视口顶部附近时隐藏header，滚动回去时显示
+        
+        // 获取元素
+        const header = document.getElementById('mainHeader');
+        const basicCard = document.getElementById('basicCard');
+        
+        // 移动端滚动隐藏header逻辑 (仅当滚动超过Basic Pentest卡片位置)
+        let isMobile = window.innerWidth <= 768;
+        let lastScrollY = window.scrollY;
+        let headerHidden = false;
+        
+        function handleMobileScroll() {
+            if (!isMobile) return;
+            
+            if (!basicCard) return;
+            const cardRect = basicCard.getBoundingClientRect();
+            const headerHeight = header.offsetHeight;
+            // 当 Basic Pentest 卡片顶部距离视口顶部 <= header高度时，认为滚动到了该区域上方，隐藏header
+            // 更精确：当卡片顶部靠近视口顶部 (小于等于header高度+20px) 时隐藏
+            if (cardRect.top <= headerHeight + 20) {
+                if (!headerHidden) {
+                    header.classList.add('header-hidden');
+                    headerHidden = true;
+                }
+            } else {
+                if (headerHidden) {
+                    header.classList.remove('header-hidden');
+                    headerHidden = false;
+                }
+            }
+        }
+        
+        // 监听滚动事件 (移动端)
+        function initMobileScrollHide() {
+            if (window.innerWidth <= 768) {
+                isMobile = true;
+                window.addEventListener('scroll', handleMobileScroll);
+                handleMobileScroll(); // 立即执行一次
+            } else {
+                isMobile = false;
+                window.removeEventListener('scroll', handleMobileScroll);
+                if (header.classList.contains('header-hidden')) {
+                    header.classList.remove('header-hidden');
+                    headerHidden = false;
+                }
+            }
+        }
+        
+        // 窗口resize时重新判断
+        window.addEventListener('resize', () => {
+            initMobileScrollHide();
+        });
+        
+        // 初始化移动端功能
+        initMobileScrollHide();
+        
+        // ========== 套餐按钮跳转逻辑 ==========
+        // Basic -> localhost:8080/pageb.html
+        // Medium -> localhost:8080/pagem.html
+        // Advanced -> localhost:8080/pagea.html
+        // Customized -> localhost:8080/pagec.html
+        
+        function redirectToPage(url) {
+            window.location.href = url;
+        }
+        
+        // 绑定所有 SELECT PACKAGE 按钮
+        const basicBtn = document.querySelector('.select-pentest-btn[data-package="basic"]');
+        const mediumBtn = document.querySelector('.select-pentest-btn[data-package="medium"]');
+        const advancedBtn = document.querySelector('.select-pentest-btn[data-package="advanced"]');
+        const customBtn = document.querySelector('.select-pentest-btn[data-package="custom"]');
+        
+        if (basicBtn) {
+            basicBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                redirectToPage('http://localhost:8080/pageb.html');
+            });
+        }
+        if (mediumBtn) {
+            mediumBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                redirectToPage('http://localhost:8080/pagem.html');
+            });
+        }
+        if (advancedBtn) {
+            advancedBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                redirectToPage('http://localhost:8080/pagea.html');
+            });
+        }
+        if (customBtn) {
+            customBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                redirectToPage('http://localhost:8080/pagec.html');
+            });
+        }
+        
+        // 同时支持点击卡片整体跳转（但按钮已处理，为避免重复，卡片点击也做同样跳转）
+        const basicCardDiv = document.getElementById('basicCard');
+        const mediumCardDiv = document.getElementById('mediumCard');
+        const advancedCardDiv = document.getElementById('advancedCard');
+        const customCardDiv = document.getElementById('customCard');
+        
+        if (basicCardDiv) {
+            basicCardDiv.addEventListener('click', (e) => {
+                if (e.target.classList && e.target.classList.contains('select-pentest-btn')) return;
+                redirectToPage('http://localhost:8080/pageb.html');
+            });
+        }
+        if (mediumCardDiv) {
+            mediumCardDiv.addEventListener('click', (e) => {
+                if (e.target.classList && e.target.classList.contains('select-pentest-btn')) return;
+                redirectToPage('http://localhost:8080/pagem.html');
+            });
+        }
+        if (advancedCardDiv) {
+            advancedCardDiv.addEventListener('click', (e) => {
+                if (e.target.classList && e.target.classList.contains('select-pentest-btn')) return;
+                redirectToPage('http://localhost:8080/pagea.html');
+            });
+        }
+        if (customCardDiv) {
+            customCardDiv.addEventListener('click', (e) => {
+                if (e.target.classList && e.target.classList.contains('select-pentest-btn')) return;
+                redirectToPage('http://localhost:8080/pagec.html');
+            });
+        }
+        
+        // ========== 返回首页按钮 ==========
+        const backBtn = document.getElementById('backToHomeBtn');
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                // 返回上一页或者首页 (根据原需求，回到主页面)
+                window.location.href = 'index.html'; // 或返回上一页，但更符合需求是返回主页面
+            });
+        }
+        
+        // Send Message 按钮功能 (发送邮件)
+        const sendMsgBtn = document.getElementById('sendMessageBtn');
+        if (sendMsgBtn) {
+            sendMsgBtn.addEventListener('click', () => {
+                const emailAddress = 'trenderwell@gmail.com';
+                const subject = encodeURIComponent('Pentesting Consultation Request - Web Box');
+                const body = encodeURIComponent('Hello Web Box Team,\n\nI would like to discuss a penetration testing engagement. Please provide more details.\n\nRegards');
+                window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+            });
+        }
+        
+        // 导航平滑滚动 (针对 Services, About us, Contact)
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+        
+        // 由于当前页面没有 services 和 about-us 的 section？为了导航不报错，添加简单锚点兼容 (实际上页面中未定义这些区域，但为了保持一致性，不做额外操作，但避免报错)
+        // 确保点击时不会出错
+        if (!document.querySelector('#services')) {
+            // 动态创建占位？不需要，但为了防止控制台警告，不做处理，点击时target可能为空就忽略
+        }
+        
+        // 滚动时header背景效果 (非隐藏时背景效果)
+        window.addEventListener('scroll', () => {
+            if (!isMobile) {
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.backgroundColor = '';
+                    header.style.backdropFilter = '';
+                }
+            } else {
+                // 移动端下也保持背景效果但不干扰隐藏
+                if (window.scrollY > 50 && !header.classList.contains('header-hidden')) {
+                    header.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else if (window.scrollY <= 50) {
+                    header.style.backgroundColor = '';
+                    header.style.backdropFilter = '';
+                }
+            }
+        });
+        
+        // 卡片入场动画
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.pentest-card').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // 防止移动端横向滚动
+        const setViewport = () => {
+            document.body.style.overflowX = 'hidden';
+        };
+        setViewport();
+        window.addEventListener('resize', setViewport);
+        
+        // 清除任何localStorage中遗留的用户名提示
+        if (localStorage.getItem('userName')) {
+            // 只做清理但不影响其他，确保不会弹出任何询问框
+            // 不做删除，但确保不弹出任何prompt
+        }
+        // 确保没有任何弹窗或用户名询问 (原代码中的prompt已被移除)
+    </script>
+</body>
+</html>
