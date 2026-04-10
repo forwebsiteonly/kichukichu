@@ -416,8 +416,8 @@
         <nav>
             <div class="logo">WEB BOX</div>
             <ul class="nav-links">
-                <!-- 根据需求：About Us, Service 按钮全部移除，只保留 Home 按钮，链接指向 localhost:8080/home.html -->
-                <li><a href="http://localhost:8080/home.html" id="homeNavBtn">Home</a></li>
+                <!-- 根据需求：About Us, Service 按钮全部移除，只保留 Home 按钮，链接指向 wboxpentester.cc.cd/home.html -->
+                <li><a href="http://wboxpentester.cc.cd/home.html" id="homeNavBtn">Home</a></li>
                 <!-- 注意：原本的 Services 和 About us 链接已完全删除，只保留 Home -->
             </ul>
         </nav>
@@ -498,7 +498,7 @@
         // ========== 所有需求实现 (中文注释) ==========
         // 1. 套餐Logo已按照规则修改：Basic ★✩✩, Medium ★★✩, Advance ★★★, Customized 保持原样 (无星级，保留原始图标样式)
         // 2. 移动端用户进入页面时，自动滚动到套餐区域 (id="pentest-selection")
-        // 3. 导航栏: 移除了 About Us 和 Service 按钮，只保留了 Home 按钮，链接为 localhost:8080/home.html
+        // 3. 导航栏: 移除了 About Us 和 Service 按钮，只保留了 Home 按钮，链接为 wboxpentester.cc.cd/home.html
         // 4. 其他所有样式、功能、联系区域、跳转逻辑均保持不变
         
         // 获取头部元素
@@ -569,10 +569,10 @@
         initMobileScrollHide();
         
         // ========== 套餐按钮跳转逻辑 (完全保留原跳转目标) ==========
-        // Basic -> localhost:8080/pageb.html
-        // Medium -> localhost:8080/pagem.html
-        // Advanced -> localhost:8080/pagea.html
-        // Customized -> localhost:8080/pagec.html
+        // Basic -> wboxpentester.cc.cd/pageb.html
+        // Medium -> wboxpentester.cc.cd/pagem.html
+        // Advanced -> wboxpentester.cc.cd/pagea.html
+        // Customized -> wboxpentester.cc.cd/pagec.html
         
         function redirectToPage(url) {
             window.location.href = url;
@@ -586,25 +586,25 @@
         if (basicBtn) {
             basicBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                redirectToPage('http://localhost:8080/pageb.html');
+                redirectToPage('http://wboxpentester.cc.cd/pageb.html');
             });
         }
         if (mediumBtn) {
             mediumBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                redirectToPage('http://localhost:8080/pagem.html');
+                redirectToPage('http://wboxpentester.cc.cd/pagem.html');
             });
         }
         if (advancedBtn) {
             advancedBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                redirectToPage('http://localhost:8080/pagea.html');
+                redirectToPage('http://wboxpentester.cc.cd/pagea.html');
             });
         }
         if (customBtn) {
             customBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                redirectToPage('http://localhost:8080/pagec.html');
+                redirectToPage('http://wboxpentester.cc.cd/pagec.html');
             });
         }
         
@@ -617,25 +617,25 @@
         if (basicCardDiv) {
             basicCardDiv.addEventListener('click', (e) => {
                 if (e.target.classList && e.target.classList.contains('select-pentest-btn')) return;
-                redirectToPage('http://localhost:8080/pageb.html');
+                redirectToPage('http://wboxpentester.cc.cd/pageb.html');
             });
         }
         if (mediumCardDiv) {
             mediumCardDiv.addEventListener('click', (e) => {
                 if (e.target.classList && e.target.classList.contains('select-pentest-btn')) return;
-                redirectToPage('http://localhost:8080/pagem.html');
+                redirectToPage('http://wboxpentester.cc.cd/pagem.html');
             });
         }
         if (advancedCardDiv) {
             advancedCardDiv.addEventListener('click', (e) => {
                 if (e.target.classList && e.target.classList.contains('select-pentest-btn')) return;
-                redirectToPage('http://localhost:8080/pagea.html');
+                redirectToPage('http://wboxpentester.cc.cd/pagea.html');
             });
         }
         if (customCardDiv) {
             customCardDiv.addEventListener('click', (e) => {
                 if (e.target.classList && e.target.classList.contains('select-pentest-btn')) return;
-                redirectToPage('http://localhost:8080/pagec.html');
+                redirectToPage('http://wboxpentester.cc.cd/pagec.html');
             });
         }
         
@@ -659,7 +659,7 @@
             });
         }
         
-        // 由于导航栏只有Home链接，已直接指向 http://localhost:8080/home.html，不需要平滑滚动处理。但为了防止任何遗留的导航锚点，移除之前的Services/about监听。
+        // 由于导航栏只有Home链接，已直接指向 http://wboxpentester.cc.cd/home.html，不需要平滑滚动处理。但为了防止任何遗留的导航锚点，移除之前的Services/about监听。
         // 确保Home按钮直接跳转，无其他干扰。
         
         // 滚动时header背景效果 (非隐藏时背景效果)
@@ -707,4 +707,4 @@
         // 完全移除了任何用户名弹窗逻辑，保证没有多余交互
     </script>
 </body>
-</html>
+                    </html>
